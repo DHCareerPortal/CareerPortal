@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Job Application</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1270853861494614');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1270853861494614&ev=PageView&noscript=1"
+/></noscript>
+
+<style>
+/* ===== BASE & SCROLLING ===== */
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 120px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+button { cursor: pointer; transition: 0.2s; }
+button:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* ===== HEADER & HERO ===== */
+.site-header { position: fixed; top: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; }
+.header-inner { max-width: 1100px; margin: auto; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: 'Montserrat', sans-serif; font-size: 18px; color: #1a73e8; }
+#signUpHeaderBtn { padding: 8px 18px; border: 2px solid #1a73e8; background: transparent; color: #1a73e8; border-radius: 4px; }
+
+.hero {
+    max-width: 700px; width: 100%; text-align: center; background: white; padding: 80px 20px;
+    border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 40px;
+}
+.hero h1 { font-family: 'Montserrat', sans-serif; font-size: 36px; color: #1a73e8; margin-bottom: 10px; }
+
+/* ===== ACCOUNT WINDOW ===== */
+.account-window {
+    display: none; width: 100%; max-width: 420px; background: #fff; padding: 35px;
+    border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid #1a73e8;
+}
+label { display: block; margin-top: 18px; font-size: 13px; font-weight: 700; color: #333; text-transform: uppercase; }
+input { width: 100%; padding: 12px; margin-top: 6px; border-radius: 6px; border: 1px solid #ddd; box-sizing: border-box; font-size: 15px; }
+
+/* Progress Bar */
+.progress-container { height: 6px; background: #eee; border-radius: 10px; overflow: hidden; margin-bottom: 25px; }
+.progress-bar { height: 100%; width: 50%; background: #1a73e8; transition: width 0.4s; }
+
+/* Consent Banner */
+#cookieBanner { position: fixed; bottom: 20px; left: 20px; right: 20px; max-width: 450px; background: #202124; color: white; padding: 20px; border-radius: 12px; z-index: 1001; display: none; }
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(32, 33, 36, 0.9); justify-content: center; align-items: center; z-index: 2000; padding: 20px; }
+.modal-content { background: #fff; padding: 40px; border-radius: 16px; text-align: center; max-width: 400px; width: 100%; }
+.legal-link { color: #1a73e8; text-decoration: underline; cursor: pointer; font-weight: bold; }
+</style>
+</head>
+
+<body>
+
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <span class="logo">Careers Portal</span>
+        <button id="signUpHeaderBtn">Sign Up</button>
+    </div>
+</header>
+
+<div class="hero" id="heroSection">
+    <h1>Ready for your next challenge?</h1>
+    <p>Create an account to start your application.</p>
+    <button id="applyNowBtn" style="padding:15px 40px; background:#1a73e8; color:white; border:none; border-radius:6px; font-weight:bold; font-size:18px;">Apply Now</button>
+</div>
+
+<div id="cookieBanner">
+    <p style="margin:0 0 15px; font-size: 14px;">We use tracking pixels to optimize our hiring data. Do you consent to tracking?</p>
+    <div style="display:flex; gap:10px; align-items: center;">
+        <button id="acceptTracking" style="flex:1; padding:10px; background:#8ab4f8; border:none; border-radius:6px; font-weight:bold;">Allow Tracking</button>
+        <button id="denyTracking" style="flex:0.5; background:transparent; color:#9aa0a6; border:none; font-size: 11px; text-decoration: underline;">Decline</button>
+    </div>
+</div>
+
+<div class="account-window" id="accountWindow">
+    <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+    
+    <form id="accountForm">
+        <input type="text" name="_honeypot" id="honeypot" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div id="step1">
+            <label>Work Email</label>
+            <input id="email" type="email" name="email" placeholder="name@company.com" required>
+            <label>Password</label>
+            <input id="password" type="password" placeholder="Create a password" required>
+            <button type="button" id="nextBtn" style="width:100%; margin-top:20px; padding:14px; background:#1a73e8; color:white; border:none; border-radius:6px; font-weight:bold;">Continue</button>
+        </div>
+
+        <div id="step2" hidden>
+            <label>Full Name</label>
+            <div style="display:flex; gap:10px;">
+                <input id="firstName" name="firstName" placeholder="First" required>
+                <input id="lastName" name="lastName" placeholder="Last" required>
+            </div>
+            
+            <div style="display:flex; gap:10px;">
+                <div style="flex:2"><label>City</label><input id="city" name="city" placeholder="City"></div>
+                <div style="flex:1"><label>ZIP</label><input id="zip" name="zip" placeholder="12345"></div>
+            </div>
+
+            <div style="margin-top: 20px; display: flex; align-items: flex-start; gap: 10px;">
+                <input type="checkbox" id="termsAgree" style="width: 18px; height: 18px; margin: 0;" required>
+                <label for="termsAgree" style="margin: 0; font-size: 12px; text-transform: none; font-weight: normal; line-height: 1.4;">
+                    I agree to the <span class="legal-link" id="viewTOS">Terms of Service</span> and <span class="legal-link" id="viewPrivacy">Privacy Policy</span>. I consent to my data being used for pixel tracking.
+                </label>
+            </div>
+
+            <button type="submit" style="width:100%; margin-top:20px; padding:14px; background:#1a73e8; color:white; border:none; border-radius:6px; font-weight:bold;">Complete Application</button>
+        </div>
+    </form>
+</div>
+
+<div id="thankYouModal" class="modal-overlay">
+    <div class="modal-content">
+        <div style="background: #e6f4ea; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+            <span style="font-size: 30px; color: #34a853;">✓</span>
+        </div>
+        <h2 style="margin-bottom:10px;">Application Sent!</h2>
+        <p style="font-size:14px; color:#666;">Check your email for your interview preparation guide.</p>
+        <button onclick="location.reload()" style="background:#1a73e8; color:white; border:none; padding:14px; border-radius:6px; width:100%; font-weight:bold;">Close</button>
+    </div>
+</div>
+
+<script>
+(() => {
+    const $ = id => document.getElementById(id);
+    // YOUR VERIFIED GOOGLE SCRIPT URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby_fmgXqGsf2NI5ybrCiXTj_oSgA0FQRpl4WvpgOw0km9r8lHOcYECmezswCUdmYJkNYQ/exec';
+
+    // UI Logic
+    if (!localStorage.getItem('user_consent')) {
+        setTimeout(() => { $('cookieBanner').style.display = "block"; }, 1500);
+    }
+
+    $('acceptTracking').onclick = () => {
+        localStorage.setItem('user_consent', 'granted');
+        $('cookieBanner').style.display = "none";
+        if($('termsAgree')) $('termsAgree').checked = true;
+    };
+
+    $('denyTracking').onclick = () => {
+        localStorage.setItem('user_consent', 'denied');
+        $('cookieBanner').style.display = "none";
+    };
+
+    $('applyNowBtn').onclick = () => { 
+        $('heroSection').style.display = "none"; 
+        $('siteHeader').style.display = "none"; 
+        $('accountWindow').style.display = "block"; 
+    };
+
+    $('nextBtn').onclick = () => {
+        if ($('email').checkValidity() && $('password').value) {
+            $('step1').hidden = true;
+            $('step2').hidden = false;
+            $('progressBar').style.width = "100%";
+        } else {
+            alert("Please enter a valid email and password.");
+        }
+    };
+
+    // FINAL SUBMISSION
+    $('accountForm').onsubmit = e => {
+        e.preventDefault();
+
+        // Bot protection
+        if ($('honeypot').value) return;
+
+        // 1. Send data to your Google Sheet
+        const formData = new FormData();
+        formData.append('email', $('email').value);
+        formData.append('firstName', $('firstName').value);
+        formData.append('lastName', $('lastName').value);
+        formData.append('city', $('city').value);
+        formData.append('zip', $('zip').value);
+
+        fetch(scriptURL, { method: 'POST', body: formData })
+            .then(res => console.log("Data saved to Google Sheet successfully"))
+            .catch(err => console.error("Error saving to sheet", err));
+
+        // 2. Fire Meta Pixel Lead Event if consented
+        if ($('termsAgree').checked && typeof fbq !== 'undefined') {
+            fbq('track', 'Lead');
+            console.log("Meta Lead Event Tracked");
+        }
+
+        // 3. Show Success Modal
+        $('accountWindow').style.display = "none";
+        $('thankYouModal').style.display = "flex";
+    };
+})();
+</script>
+
+</body>
+</html>
