@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers Portal | Premium Job Matching</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root { 
+            --primary: #2563eb; 
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --white: #ffffff;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- MODERN MAINTENANCE SCREEN --- */
+        .maintenance-screen {
+            display: none; 
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at top right, #e2e8f0, #f8fafc);
+            z-index: 10000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        body.is-maintenance .maintenance-screen { display: flex; }
+        body.is-maintenance .site-header, body.is-maintenance .hero, body.is-maintenance footer { display: none !important; }
+
+        .maintenance-card {
+            background: var(--white);
+            padding: 50px 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .spinner-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+        }
+
+        .spinner-large {
+            width: 100%;
+            height: 100%;
+            border: 4px solid #f1f5f9;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .maintenance-card h1 { 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 24px; 
+            font-weight: 700;
+            margin: 0 0 16px;
+            letter-spacing: -0.025em;
+        }
+
+        .maintenance-card p { 
+            color: var(--text-muted); 
+            line-height: 1.6; 
+            margin-bottom: 32px;
+            font-size: 15px;
+        }
+
+        .status-pill { 
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ecfdf5; 
+            color: #065f46; 
+            padding: 8px 16px; 
+            border-radius: 9999px; 
+            font-size: 12px; 
+            font-weight: 600; 
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        /* --- ACTIVE SITE STYLES --- */
+        .site-header { 
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px; 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .logo { font-family: 'Montserrat'; font-weight: 700; color: var(--primary); font-size: 20px; }
+
+        .hero { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 120px 20px; 
+            text-align: center; 
+        }
+
+        .hero h1 { 
+            font-family: 'Montserrat'; 
+            font-size: clamp(32px, 5vw, 48px); 
+            line-height: 1.1; 
+            margin-bottom: 24px;
+            letter-spacing: -0.04em;
+        }
+
+        .hero p { color: var(--text-muted); font-size: 18px; margin-bottom: 40px; }
+
+        .btn-main { 
+            background: var(--primary); 
+            color: white; 
+            padding: 16px 32px; 
+            border: none; 
+            border-radius: 12px; 
+            font-weight: 600; 
+            font-size: 16px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-main:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3); }
+
+        footer { padding: 60px 20px; text-align: center; color: var(--text-muted); font-size: 14px; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+
+<body class="is-maintenance">
+
+<div class="maintenance-screen">
+    <div class="maintenance-card">
+        <div class="spinner-container">
+            <div class="spinner-large"></div>
+        </div>
+        <h1>Portal Sync in Progress</h1>
+        <p>Our engineers are currently optimizing the 2026 database for high-paying remote roles. We will be live momentarily.</p>
+        <div class="status-pill">
+            <span class="status-dot"></span>
+            Optimizing Matches
+        </div>
+    </div>
+</div>
+
+<header class="site-header">
+    <div style="max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center;">
+        <div class="logo">CAREERS PORTAL</div>
+    </div>
+</header>
+
+<div class="hero">
+    <h1>Find your next career path, <span style="color:var(--primary)">elevated.</span></h1>
+    <p>Premium job matching verified for high-impact professionals.</p>
+    <button class="btn-main">Create Your Profile</button>
+</div>
+
+<footer>
+    &copy; 2026 Careers Portal. All rights reserved.
+</footer>
+
+<script>
+(() => {
+    const maintenanceMode = true; 
+    if (!maintenanceMode) { document.body.classList.remove('is-maintenance'); }
+})();
+</script>
+
+</body>
+</html>
